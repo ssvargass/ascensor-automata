@@ -1,0 +1,32 @@
+<form>
+  <div class="form-group">
+    <label for="pisos">Número de pisos</label>
+    <input type="number" [(ngModel)]="pisos" name="pisos" (keyup)="setPisos()">
+  </div>
+</form>
+
+<div class="row">
+  <div class="col-md-8 main">
+    <div class="ascensor"></div>
+    <div *ngFor="let piso of pisosArr; let i=index" class="piso">
+      <div class="nivel">{{ pisos - i }}</div>
+      <div class="gates" [class.abierto]="!close && i == pisoActual">
+        <div class="left"></div>
+        <div class="right"></div>
+      </div>
+      <div class="control">
+        <div *ngIf="i > 0" class="arriba glyphicon glyphicon-triangle-top" (click)="cambiarNivel('arriba',i)"></div>
+        <div *ngIf="i < pisos - 1" class="abajo glyphicon glyphicon-triangle-bottom" (click)="cambiarNivel('abajo', i)"></div>
+      </div>
+    </div>
+  </div>
+   <div class="col-md-4 box">
+     <div class="controller">
+       <form>
+          <div class="btn-group btn-group-justified btn-group-lg" role="group">
+            <button type="button" class="btn btn-info" *ngFor="let piso of pisosArr; let j=index" (click)="setDestino(j)">{{j+1}}</button>
+          </div>
+       </form>
+     </div>
+   </div>
+</div>
